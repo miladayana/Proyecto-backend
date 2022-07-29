@@ -20,6 +20,6 @@ const storeSchema = new Schema({
     },
     
 });
-const helados = mongoose.model('helados', storeSchema);
+const icecream = mongoose.model('icecream', storeSchema);
 
-module.exports = {helados}
+module.exports = {icecream}
