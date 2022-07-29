@@ -1,8 +1,6 @@
-// const res = require('express/lib/response');
 const {icecream} = require('../models/articulos')
 const { check, validationResult, body, } = require("express-validator");
 const axios = require('axios');
-const bcrytpt = require('bcryptjs');
 
 const vistaUno = (req,res)=>{
     res.render('index', { title: 'Express' });
@@ -13,7 +11,7 @@ const vistaHelados = async (req,res) =>{
      res.send(helados)
 }
 const vistaUnicaHelado = async (req,res) =>{
-
+    
     try{
      const helado = await icecream.findById(req.params.id)
      res.json({helado})
@@ -26,15 +24,6 @@ const crearHelado = async (req,res) =>{
     try{
         const error = validationResult(req)
         if (error.isEmpty()) {
-
-            // sabor no debe estar vacio(sino enviar mensaje)
-            // sabor debe tener mas de 4 caracteres y menos de 15
-            // const saboresValidation = check("sabores")
-            // console.log('RESPUESTA: ', saboresValidation)
-
-            // if () {
-
-            // }
             const {sabores, envases, toppin, precio} = req.body
             const helado = new icecream ({ sabores,envases, toppin,precio });
             await helado.save()
@@ -65,8 +54,6 @@ const editarHelado = async (req,res) => {
     }
 }
 const borrarHelado = async (req, res) => {
-    console.log('HERE: --> ', req.params)
-
     try{
         const helado = await icecream.findByIdAndDelete(req.params.id)
         res.json({msg: "eliminado", helado})
